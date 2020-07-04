@@ -7,14 +7,24 @@
 
 import SwiftUI
 
+struct TabState {
+    var selectedTab: Int
+    var showingDetails: Int?
+}
+
+enum TabAction {
+    case openListTabDetails(index: Int)
+}
+
+
 struct ContentView: View {
-    @State var selectedTab: Int = 0
-    
+    @EnvironmentObject var store: Store<TabState, TabAction> 
+        
     var body: some View {
-        TabView(selection: $selectedTab) {
+        TabView(selection: $store.state.selectedTab) {
             FirstTab().tag(0)
             ListTab().tag(1)
-            ModalTab().tag(2)
+            ModalTab(store: StoreProvider<ModalState, ModalAction>().getStore()).tag(2)
         }
     }
 }
