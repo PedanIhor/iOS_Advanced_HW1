@@ -12,8 +12,10 @@ struct ListTab: View {
     
     var body: some View {
         NavigationView {
-            List(store.state.listDataSource, selection: $store.state.showingDetails) {
-                ItemLink(selection: $store.state.showingDetails, index: $0.id)
+            ScrollView {
+                ForEach(0..<store.state.listDataSource.count) { index in
+                    ItemLink(selection: $store.state.showingDetails, index: index)
+                }
             }
             .navigationTitle("List")
         }
@@ -36,17 +38,29 @@ struct ItemLink: View {
     let index: Int
     
     var body: some View {
-        NavigationLink("Item \(index)",
-                       destination: Text("Details for item \(index)")
-                        .padding()
-                        .font(.largeTitle)
-                        .navigationTitle("Item \(index)"),
-                       tag: index, selection: $selection)
+        NavigationLink(
+            destination: Text("Details for item \(index)")
+                .padding()
+                .font(.largeTitle)
+                .navigationTitle("Item \(index)"),
+            tag: index,
+            selection: $selection,
+            label: {
+                VStack {
+                    HStack {
+                        Text("Item \(index)")
+                            .padding(.leading, 16)
+                            .accentColor(.black)
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .padding(.trailing, 16)
+                            .accentColor(.gray)
+                    }
+                    Rectangle()
+                        .frame(maxWidth: .infinity, maxHeight: 1)
+                        .accentColor(Color.init(white: 0.8, opacity: 0.7))
+                }
+            }
+        )
     }
 }
-
-//struct ListTab_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ListTab()
-//    }
-//}

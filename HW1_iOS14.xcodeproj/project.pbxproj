@@ -81,7 +81,6 @@
 				6DA62DF524AC629500BDAD0B /* FirstTab.swift */,
 				6DA62DF824AC672900BDAD0B /* ListTab.swift */,
 				6DA62DFB24AC6B9600BDAD0B /* ModalTab.swift */,
-				6D89F3BA24B05FD400B37A1B /* StoreProvider.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -116,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				6DF6C4C024ADC84D00D12350 /* Store.swift */,
+				6D89F3BA24B05FD400B37A1B /* StoreProvider.swift */,
 			);
 			path = Flux;
 			sourceTree = "<group>";
