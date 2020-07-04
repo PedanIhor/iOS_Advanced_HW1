@@ -9,11 +9,19 @@ import SwiftUI
 
 struct FirstTab: View {
     @EnvironmentObject var store: Store<TabState, TabAction>
+    @State private var pickerSelection: Int = 0
     
     var body: some View {
-        Button("Go to List index 4 Details", action: {
-            store.dispatch(.openListTabDetails(index: 4))
-        })
+        VStack {
+            Picker.init("Select", selection: $pickerSelection) {
+                ForEach(0 ..< store.state.listDataSource.count) { index in
+                    return Text("\(index)").tag(index)
+                }
+            }.labelsHidden()
+            Button.init("Open list item") {
+                store.dispatch(.openListTabDetails(index: pickerSelection))
+            }
+        }
         .tabItem {
             Label(
                 title: { Text("Navigation") },

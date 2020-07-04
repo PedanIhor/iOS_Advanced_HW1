@@ -9,15 +9,12 @@ import SwiftUI
 
 struct ListTab: View {
     @EnvironmentObject var store: Store<TabState, TabAction>
-    @State var dataSource = (0 ..< 100).map { Item(id: $0) }
     
     var body: some View {
         NavigationView {
-            List(dataSource, selection: $store.state.showingDetails) {
+            List(store.state.listDataSource, selection: $store.state.showingDetails) {
                 ItemLink(selection: $store.state.showingDetails, index: $0.id)
-                    .animation(nil)
             }
-            .animation(nil)
             .navigationTitle("List")
         }
         .navigationViewStyle(StackNavigationViewStyle())

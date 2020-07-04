@@ -10,6 +10,7 @@ import SwiftUI
 struct TabState {
     var selectedTab: Int
     var showingDetails: Int?
+    var listDataSource = (0 ..< 100).map { Item(id: $0) }
 }
 
 enum TabAction {
